@@ -1,5 +1,5 @@
 # pogoprint
-Ansible playbook to deploy printing services on a pogoplug running archlinux
+Ansible playbook to deploy network printing services on Arch Linux
 
 ## To run
 1. Install your own ssh key under alarm user
@@ -7,4 +7,4 @@ Ansible playbook to deploy printing services on a pogoplug running archlinux
 3. Configure printer via cups GUI / lpadmin
 4. ```ansible-playbook -i inventory airprint.yml -K```
 
-While the whole process could be ansibilized, this is more of a failsafe playbook if the pogo dies.
+While the whole process could be ansibilized, this is more of a failsafe playbook if the pogoplug dies.
