@@ -1,0 +1,35 @@
+---
+# tasks file for cups
+- name: Install cups + driver
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - cups
+  - splix
+  - avahi
+  - python2
+  - python2-pycups
+
+- name: Symlink python binary
+  file:
+    src: /usr/bin/python2
+    dest: /usr/bin/python
+    owner: root
+    group: root
+    state: link
+    recurse: no
+
+- name: Render cups config
+  template:
+    src: cupsd_conf.j2
+    dest: /etc/cups/cupsd.conf
+    owner: root
+    group: lp
+    mode: '0640'
+
+- name: Enable cups
+  service:
+    name: org.cups.cupsd
+    enabled: yes
+    state: started

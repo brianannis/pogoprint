@@ -1,0 +1,9 @@
+- hosts: print
+  remote_user: alarm
+  become: yes
+  become_method: su
+  become_user: root
+  gather_facts: yes
+  roles:
+    - { role: common, tags: 'common'}
+    - { role: cups, tags: 'cups'}

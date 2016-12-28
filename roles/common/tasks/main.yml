@@ -1,0 +1,21 @@
+---
+# tasks file for common
+- name: Install common tools
+  pacman:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - wget
+    - htop
+    - ntp
+
+- name: Set timezone
+  timezone:
+    name: America/New_York
+
+- name: Enable ntp
+  service:
+    name: ntpd
+    enabled: yes
+    state: started
