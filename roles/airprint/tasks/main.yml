@@ -1,0 +1,48 @@
+---
+# tasks file for airprint
+
+- name: Create airprint directory
+  file:
+    name: /opt/airprint
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+    recurse: no
+
+- name: Download airprint script
+  get_url:
+    url: https://raw.githubusercontent.com/tjfontaine/airprint-generate/master/airprint-generate.py
+    dest: /opt/airprint/airprint-generate.py
+    owner: root
+    group: root
+    mode: '0755'
+    validate_certs: no
+
+- name: Copy MIME types
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/share/cups/mime/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+  - airprint.types
+  - airprint.convs
+
+- name: Start avahi
+  service:
+    name: avahi-daemon
+    enabled: yes
+    state: restarted
+
+# should be a handler
+- name: Restart cups
+  service:
+    name: org.cups.cupsd
+    state: restarted
+
+- name: Generate airprint config
+  shell: /opt/airprint/airprint-generate.py
+  args:
+    chdir: /etc/avahi/services

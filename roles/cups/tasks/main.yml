@@ -27,6 +27,7 @@
     owner: root
     group: lp
     mode: '0640'
+    backup: yes
 
 - name: Enable cups
   service:
