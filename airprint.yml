@@ -1,8 +1,5 @@
-- hosts: print
-  remote_user: alarm
-  become: yes
-  become_method: su
-  become_user: root
+- hosts: printserver
+  become: true
   gather_facts: yes
   roles:
     - { role: airprint, tags: 'airprint'}

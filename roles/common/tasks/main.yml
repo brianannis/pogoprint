@@ -8,14 +8,15 @@
   with_items:
     - wget
     - htop
-    - ntp
 
 - name: Set timezone
   timezone:
     name: America/New_York
 
-- name: Enable ntp
-  service:
-    name: ntpd
-    enabled: yes
-    state: started
+- name: Set motd
+  template:
+    src: motd.j2
+    dest: /etd/motd
+    owner: root
+    group: root
+    mode: '0644'
