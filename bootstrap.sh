@@ -1,5 +1,5 @@
 # Install sudo
-pacman -Syu sudo
+pacman -Syu sudo uboot-tools
 echo 'alarm ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/alarm
 
 # Add public key
