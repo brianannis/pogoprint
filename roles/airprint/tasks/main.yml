@@ -30,19 +30,18 @@
   - airprint.types
   - airprint.convs
 
+- name: Generate airprint config
+  shell: /opt/airprint/airprint-generate.py
+  args:
+    chdir: /etc/avahi/services
+
 - name: Start avahi
   service:
     name: avahi-daemon
     enabled: yes
     state: restarted
 
-# should be a handler
 - name: Restart cups
   service:
     name: org.cups.cupsd
     state: restarted
-
-- name: Generate airprint config
-  shell: /opt/airprint/airprint-generate.py
-  args:
-    chdir: /etc/avahi/services

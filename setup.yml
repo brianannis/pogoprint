@@ -1,6 +1,11 @@
 - hosts: printserver
   become: true
+  gather_facts: no
+  roles:
+    - { role: bootstrap, tags: 'bootstrap'}
+
+- hosts: printserver
+  become: true
   gather_facts: yes
   roles:
-    - { role: common, tags: 'common'}
     - { role: cups, tags: 'cups'}
