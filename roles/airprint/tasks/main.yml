@@ -36,12 +36,12 @@
     chdir: /etc/avahi/services
 
 - name: Start avahi
-  service:
+  systemd:
     name: avahi-daemon
     enabled: yes
     state: restarted
 
 - name: Restart cups
-  service:
-    name: org.cups.cupsd
+  systemd:
+    name: cups
     state: restarted

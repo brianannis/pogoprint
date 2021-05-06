@@ -1,20 +1,17 @@
 ---
 # tasks file for common
 - name: Install common tools
-  pacman:
-    name: "{{ item }}"
+  community.general.pacman:
+    name: ['wget', 'htop']
     state: present
     update_cache: yes
-  with_items:
-    - wget
-    - htop
 
 - name: Set timezone
-  timezone:
+  community.general.timezone:
     name: America/New_York
 
 - name: Set motd
-  template:
+  ansible.builtin.template:
     src: motd.j2
     dest: /etc/motd
     owner: root

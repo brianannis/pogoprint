@@ -1,23 +1,9 @@
 ---
 # tasks file for cups
 - name: Install cups + driver
-  pacman:
-    name: "{{ item }}"
+  community.general.pacman:
+    name: ['cups', 'splix', 'avahi', 'python-pycups']
     state: present
-  with_items:
-  - cups
-  - splix
-  - avahi
-  - python2-pycups
-
-- name: Symlink python binary
-  file:
-    src: /usr/bin/python2
-    dest: /usr/bin/python
-    owner: root
-    group: root
-    state: link
-    recurse: no
 
 - name: Render cups config
   template:
@@ -30,6 +16,6 @@
 
 - name: Enable cups
   systemd:
-    name: org.cups.cupsd
+    name: cups
     enabled: yes
     state: started

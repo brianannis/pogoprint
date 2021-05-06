@@ -1,2 +1,2 @@
 - name: Install python
-  raw: pacman -Syu python2 --noconfirm --needed
+  raw: pacman -Syu python --noconfirm --needed
