@@ -1,8 +1,8 @@
 ---
 # tasks file for cups
 - name: Install cups + driver
-  community.general.pacman:
-    name: ['cups', 'splix', 'avahi', 'python-pycups']
+  apt:
+    name: ['cups', 'splix', 'avahi-daemon', 'python3-cups']
     state: present
 
 - name: Render cups config
@@ -10,12 +10,12 @@
     src: cupsd_conf.j2
     dest: /etc/cups/cupsd.conf
     owner: root
-    group: lp
-    mode: '0640'
+    group: root
+    mode: '0644'
     backup: yes
 
 - name: Enable cups
   systemd:
     name: cups
     enabled: yes
-    state: started
+    state: restarted
