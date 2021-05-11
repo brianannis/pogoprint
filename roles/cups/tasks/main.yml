@@ -1,8 +1,14 @@
 ---
 # tasks file for cups
+- name: set groups
+  user:
+    name: ubuntu
+    groups: lpadmin
+    append: yes
+
 - name: Install cups + driver
   apt:
-    name: ['cups', 'splix', 'avahi-daemon', 'python3-cups']
+    name: ['cups', 'printer-driver-splix', 'avahi-daemon', 'python3-cups']
     state: present
 
 - name: Render cups config
